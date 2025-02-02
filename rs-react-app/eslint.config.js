@@ -36,11 +36,11 @@ export default tseslint.config(
       ...react.configs.recommended.rules,
       ...react.configs['jsx-runtime'].rules,
       'prettier/prettier': [
-        "error",
+        'error',
         {
-          'endOfLine': 'auto'
-        }
-]
+          endOfLine: 'auto',
+        },
+      ],
     },
     settings: {
       react: {

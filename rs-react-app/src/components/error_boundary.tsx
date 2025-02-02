@@ -4,23 +4,22 @@ import Results from '../views/results';
 import ErrorButton from './error_button';
 
 class ErrorBoundary extends Component {
-  state: {hasError: boolean}
+  state: { hasError: boolean };
   constructor(props: Component) {
-    super(props)
+    super(props);
     this.state = { hasError: false };
   }
 
   static getDerivedStateFromError() {
-    return {hasError: true}
+    return { hasError: true };
   }
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
     console.log('Error = ' + error, 'Error info:' + errorInfo);
   }
-  
   render() {
     if (this.state.hasError) {
-      return <h2>Somthing went wrong</h2>
+      return <h2>Somthing went wrong</h2>;
     }
     return (
       <>
@@ -28,7 +27,7 @@ class ErrorBoundary extends Component {
         <Results />
         <ErrorButton />
       </>
-    )
+    );
   }
 }
 
