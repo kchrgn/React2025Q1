@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import SearchInputField from '../components/search_input_fields';
+import SearchInputField from '../components/search_input_field';
 import SearchButton from '../components/search_button';
 
 class TopControls extends Component {
