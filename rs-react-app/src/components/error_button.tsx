@@ -1,8 +1,18 @@
 import { Component } from 'react';
 
 class ErrorButton extends Component {
+  state = {emitError: false}
   render() {
-    return <button>Error Button</button>;
+    if (this.state.emitError) throw new Error('User trhrown error')
+    return (
+      <>
+        <button 
+          onClick={()=>{this.setState({emitError: true})}}
+        > 
+          Error Button
+        </button>;
+      </>
+    )
   }
 }
 

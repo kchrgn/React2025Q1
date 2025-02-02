@@ -2,13 +2,16 @@ import './App.css';
 import TopControls from './views/topcontrols';
 import Results from './views/results';
 import ErrorButton from './components/error_button';
+import ErrorBoundary from './components/error_boundary';
 
 function App() {
   return (
     <>
-      <TopControls />
-      <Results />
-      <ErrorButton />
+      <ErrorBoundary>
+        <TopControls />
+        <Results />
+        <ErrorButton />
+      </ErrorBoundary>
     </>
   );
 }
