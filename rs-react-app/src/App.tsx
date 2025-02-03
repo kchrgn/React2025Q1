@@ -9,7 +9,7 @@ function App() {
     <>
       <ErrorBoundary>
         <TopControls />
-        <Results />
+        <Results searchTerm="" />
         <ErrorButton />
       </ErrorBoundary>
     </>
