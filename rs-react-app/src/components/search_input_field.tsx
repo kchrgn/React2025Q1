@@ -1,36 +1,30 @@
-import { Component, SyntheticEvent } from 'react';
+import { useState, useEffect } from 'react';
+import { ChangeEvent } from 'react';
 
-class SearchInputField extends Component {
-  state = { value: '' };
+export default function SearchInputField() {
+  const [value, setValue] = useState('');
 
-  handleSearchValueChange = (e: ChangeEvent<HTMLInputElement>) => {
-    this.setState({ value: e.target.value });
+  const handleSearchValueChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target.value);
     localStorage.setItem('searchFieldValue', e.target.value);
   };
 
-  componentDidMount(): void {
+  useEffect(() => {
     const lsValue = localStorage.getItem('searchFieldValue');
     if (lsValue) {
-      this.setState({ value: localStorage.getItem('searchFieldValue') });
+      setValue(lsValue);
     } else {
       localStorage.setItem('searchFieldValue', '');
     }
-  }
-  render() {
-    return (
-      <>
-        <input
-          type="text"
-          value={this.state.value}
-          onChange={this.handleSearchValueChange}
-        ></input>
-      </>
-    );
-  }
-}
+  }, []);
 
-interface ChangeEvent<T = Element> extends SyntheticEvent<T> {
-  target: EventTarget & T;
+  return (
+    <>
+      <input
+        type="text"
+        value={value}
+        onChange={handleSearchValueChange}
+      ></input>
+    </>
+  );
 }
-
-export default SearchInputField;

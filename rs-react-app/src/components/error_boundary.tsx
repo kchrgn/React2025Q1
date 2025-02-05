@@ -1,11 +1,16 @@
-import { Component, ErrorInfo } from 'react';
-import TopControls from '../views/topcontrols';
-import Results from '../views/results';
-import ErrorButton from './error_button';
+import { Component, ErrorInfo, ReactNode } from 'react';
 
-class ErrorBoundary extends Component {
-  state: { hasError: boolean };
-  constructor(props: Component) {
+interface IErrorBoundaryProps {
+  children: ReactNode;
+}
+interface IErrorBoundaryState {
+  hasError: boolean;
+}
+class ErrorBoundary extends Component<
+  IErrorBoundaryProps,
+  IErrorBoundaryState
+> {
+  constructor(props: IErrorBoundaryProps) {
     super(props);
     this.state = { hasError: false };
   }
@@ -21,13 +26,7 @@ class ErrorBoundary extends Component {
     if (this.state.hasError) {
       return <h2>Something went wrong</h2>;
     }
-    return (
-      <>
-        <TopControls />
-        <Results searchTerm="nab" />
-        <ErrorButton />
-      </>
-    );
+    return this.props.children;
   }
 }
 

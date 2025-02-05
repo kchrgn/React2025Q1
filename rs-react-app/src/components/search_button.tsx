@@ -1,9 +1,3 @@
-import { Component } from 'react';
-
-class SearchButton extends Component {
-  render() {
-    return <button>Search</button>;
-  }
+export default function SearchButton() {
+  return <button>Search</button>;
 }
-
-export default SearchButton;
