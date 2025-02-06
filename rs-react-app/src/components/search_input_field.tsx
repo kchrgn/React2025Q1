@@ -1,18 +1,20 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useContext } from 'react';
 import { ChangeEvent } from 'react';
+import { SearchTermContext } from '../context/searchTermContext';
 
 export default function SearchInputField() {
-  const [value, setValue] = useState('');
+  const { searchFieldValue, setSearchFieldValue } =
+    useContext(SearchTermContext);
 
   const handleSearchValueChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.value);
+    setSearchFieldValue(e.target.value);
     localStorage.setItem('searchFieldValue', e.target.value);
   };
 
   useEffect(() => {
     const lsValue = localStorage.getItem('searchFieldValue');
     if (lsValue) {
-      setValue(lsValue);
+      setSearchFieldValue(lsValue);
     } else {
       localStorage.setItem('searchFieldValue', '');
     }
@@ -22,7 +24,7 @@ export default function SearchInputField() {
     <>
       <input
         type="text"
-        value={value}
+        value={searchFieldValue}
         onChange={handleSearchValueChange}
       ></input>
     </>
