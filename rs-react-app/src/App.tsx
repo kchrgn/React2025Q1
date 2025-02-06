@@ -15,21 +15,21 @@ function App() {
     errorNumber: 200,
   });
 
-  async function getAPIData(search: string) {
-    const url = 'https://swapi.dev/api/planets/';
-    const response = await fetch(search ? url + '?search=' : url);
-    if (response.ok) {
-      const json = await response.json();
-      setResults(json.results);
-      console.log(results);
-      setStatus({ ...status, isLoading: false });
-    } else {
-      setStatus({ ...status, error: true, errorNumber: response.status });
-    }
-  }
-
   useEffect(() => {
-    getAPIData(searchTerm);
+    const url = 'https://swapi.dev/api/planets/';
+    fetch(searchTerm ? url + '?search=' : url)
+      .then((res) => {
+        if (res.ok) {
+          return res.json()
+        } else {
+          setStatus({ ...status, error: true, errorNumber: res.status });
+        }
+        return res.json()
+      })
+      .then((data) => {
+        setResults({planets: data.results})
+        setStatus({ ...status, isLoading: false });
+      })
   }, [searchTerm]);
 
   return (
