@@ -1,6 +1,7 @@
-import { useEffect, useContext } from 'react';
+import { useContext } from 'react';
 import { ChangeEvent } from 'react';
 import { SearchTermContext } from '../context/searchTermContext';
+import useGetSearchThermFromLS from '../hooks/getSearchThermFromLS';
 
 export default function SearchInputField() {
   const { searchFieldValue, setSearchFieldValue } =
@@ -11,14 +12,7 @@ export default function SearchInputField() {
     localStorage.setItem('searchFieldValue', e.target.value);
   };
 
-  useEffect(() => {
-    const lsValue = localStorage.getItem('searchFieldValue');
-    if (lsValue) {
-      setSearchFieldValue(lsValue);
-    } else {
-      localStorage.setItem('searchFieldValue', '');
-    }
-  }, []);
+  useGetSearchThermFromLS(setSearchFieldValue);
 
   return (
     <>
