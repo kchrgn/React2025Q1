@@ -19,7 +19,7 @@ export default function Paginator() {
           })
         } 
       </div>
-    </div>;
+    </div>
     </>
   )
 }

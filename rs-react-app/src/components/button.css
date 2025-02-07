@@ -1,0 +1,13 @@
+.btn {
+  border: none;
+  color: white;
+  padding: 10px 10px;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.search {background-color: #4c7faf;} 
+.search:hover {background: #2469aa;}
+
+.error {background-color: #ff9800;} 
+.error:hover {background: #e68a00;}

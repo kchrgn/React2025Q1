@@ -54,7 +54,6 @@ function App() {
           }}
         >
           <TopControls />
-          <ErrorButton />
         </SearchTermContext.Provider>
         <ResultsContext.Provider value={{pageNumber, pageCount, setPageNumber}} >
           <Results list={results} apiStatus={status} />
