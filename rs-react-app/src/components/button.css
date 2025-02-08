@@ -6,8 +6,16 @@
   cursor: pointer;
 }
 
-.search {background-color: #4c7faf;} 
-.search:hover {background: #2469aa;}
+.search {
+  background-color: #4c7faf;
+}
+.search:hover {
+  background: #2469aa;
+}
 
-.error {background-color: #ff9800;} 
-.error:hover {background: #e68a00;}
+.error {
+  background-color: #ff9800;
+}
+.error:hover {
+  background: #e68a00;
+}

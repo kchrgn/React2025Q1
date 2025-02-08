@@ -5,10 +5,10 @@ import './results.css';
 export default function Results({ list, apiStatus }: IResultsProps) {
   if (apiStatus.isLoading) {
     return (
-      <div className='container'>
+      <div className="container">
         <Loader />
       </div>
-    )
+    );
   }
   if (apiStatus.error) {
     return <div>HTTP error {apiStatus.errorNumber}</div>;
@@ -26,7 +26,7 @@ export default function Results({ list, apiStatus }: IResultsProps) {
                 <div>climate: {e.climate}</div>
               </div>
             ))}
-          </div>
+        </div>
       </div>
     );
   }

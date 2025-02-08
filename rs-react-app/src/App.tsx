@@ -9,7 +9,7 @@ import { IResults, IStatus } from './interfaces/results';
 import { SearchTermContext } from './context/searchTermContext';
 import { ResultsContext } from './context/resultsContext';
 const PLANETS_PER_PAGE = 10;
-const API_URL = 'https://swapi.dev/api/planets/'
+const API_URL = 'https://swapi.dev/api/planets/';
 
 function App() {
   const [results, setResults] = useState<IResults>();
@@ -25,7 +25,10 @@ function App() {
 
   useEffect(() => {
     setStatus({ ...status, isLoading: true });
-    fetch(searchTerm ? API_URL + '?search=' + searchTerm : API_URL)
+    let url = API_URL + '?search=' + searchTerm + '&page=' + pageNumber;
+    console.log(url);
+
+    fetch(url)
       .then((res) => {
         if (res.ok) {
           return res.json();
@@ -36,26 +39,27 @@ function App() {
       })
       .then((data) => {
         setResults({ planets: data.results });
-        setPageCount(Math.ceil(data.count/PLANETS_PER_PAGE));
-        setPageNumber(1);
+        setPageCount(Math.ceil(data.count / PLANETS_PER_PAGE));
         setStatus({ ...status, isLoading: false });
       });
-  }, [searchTerm]);
+  }, [searchTerm, pageNumber]);
 
   return (
     <>
       <ErrorBoundary>
-        <SearchTermContext.Provider
-          value={{
-            searchTerm,
-            searchFieldValue,
-            setSearchFieldValue,
-            setSearchTerm,
-          }}
+        <ResultsContext.Provider
+          value={{ pageNumber, pageCount, setPageNumber }}
         >
-          <TopControls />
-        </SearchTermContext.Provider>
-        <ResultsContext.Provider value={{pageNumber, pageCount, setPageNumber}} >
+          <SearchTermContext.Provider
+            value={{
+              searchTerm,
+              searchFieldValue,
+              setSearchFieldValue,
+              setSearchTerm,
+            }}
+          >
+            <TopControls />
+          </SearchTermContext.Provider>
           <Results list={results} apiStatus={status} />
           <Paginator />
         </ResultsContext.Provider>
