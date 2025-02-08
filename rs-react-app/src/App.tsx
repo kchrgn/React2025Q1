@@ -1,7 +1,6 @@
 import './App.css';
 import TopControls from './views/topcontrols';
 import Results from './views/results';
-import ErrorButton from './components/error_button';
 import ErrorBoundary from './components/error_boundary';
 import Paginator from './components/paginator/paginator';
 import { useState, useEffect } from 'react';
@@ -48,7 +47,14 @@ function App() {
     <>
       <ErrorBoundary>
         <ResultsContext.Provider
-          value={{ pageNumber, pageCount, setPageNumber }}
+          value={{
+            results,
+            status,
+            setStatus,
+            pageNumber,
+            pageCount,
+            setPageNumber,
+          }}
         >
           <SearchTermContext.Provider
             value={{
@@ -60,7 +66,7 @@ function App() {
           >
             <TopControls />
           </SearchTermContext.Provider>
-          <Results list={results} apiStatus={status} />
+          <Results />
           <Paginator />
         </ResultsContext.Provider>
       </ErrorBoundary>

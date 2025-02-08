@@ -3,7 +3,7 @@ import { Component, ErrorInfo, ReactNode } from 'react';
 interface IErrorBoundaryProps {
   children: ReactNode;
 }
-interface IErrorBoundaryState {
+export interface IErrorBoundaryState {
   hasError: boolean;
 }
 class ErrorBoundary extends Component<
@@ -22,9 +22,22 @@ class ErrorBoundary extends Component<
   componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
     console.log('Error = ' + error, 'Error info:' + errorInfo);
   }
+
   render() {
     if (this.state.hasError) {
-      return <h2>Something went wrong</h2>;
+      return (
+        <>
+          <h2>Something went wrong</h2>
+          <button
+            className="btn error"
+            onClick={() => {
+              this.setState({ hasError: false });
+            }}
+          >
+            Reload page
+          </button>
+        </>
+      );
     }
     return this.props.children;
   }
