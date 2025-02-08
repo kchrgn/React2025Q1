@@ -1,4 +1,5 @@
 import { Component, ErrorInfo, ReactNode } from 'react';
+import './button.css';
 
 interface IErrorBoundaryProps {
   children: ReactNode;

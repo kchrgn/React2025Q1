@@ -8,6 +8,8 @@ interface IResultsContext {
   pageNumber: number;
   pageCount: number;
   setPageNumber: React.Dispatch<React.SetStateAction<number>>;
+  item: number;
+  setItem: React.Dispatch<React.SetStateAction<number>>;
 }
 export const ResultsContext = createContext<IResultsContext>({
   results: { planets: [] },
@@ -16,4 +18,6 @@ export const ResultsContext = createContext<IResultsContext>({
   pageNumber: 1,
   pageCount: 0,
   setPageNumber: () => {},
+  item: 0,
+  setItem: () => {},
 });

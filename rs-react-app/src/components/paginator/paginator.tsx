@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import { ResultsContext } from '../../context/resultsContext';
+import { Link } from 'react-router';
 import './paginator.css';
 
 export default function Paginator() {
@@ -8,11 +9,12 @@ export default function Paginator() {
   return (
     <>
       <div className="center">
-        <div className="paginator">
+        <nav className="paginator">
           {pages.map((e, index) => {
             if (e == pageNumber) {
               return (
-                <a
+                <Link
+                  to="/sw/planets"
                   className="active"
                   onClick={() => {
                     setPageNumber(e);
@@ -20,7 +22,7 @@ export default function Paginator() {
                   key={index}
                 >
                   {e}
-                </a>
+                </Link>
               );
             } else {
               return (
@@ -35,7 +37,7 @@ export default function Paginator() {
               );
             }
           })}
-        </div>
+        </nav>
       </div>
     </>
   );

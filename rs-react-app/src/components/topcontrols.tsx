@@ -1,7 +1,7 @@
 import { Component } from 'react';
-import SearchInputField from '../components/search_input_field';
-import SearchButton from '../components/search_button';
-import ErrorButton from '../components/error_button';
+import SearchInputField from './search_input_field';
+import SearchButton from './search_button';
+import ErrorButton from './error_button';
 
 class TopControls extends Component {
   render() {
