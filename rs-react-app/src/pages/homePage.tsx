@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 import { IResults, IStatus } from '../interfaces/results';
 import { SearchTermContext } from '../context/searchTermContext';
 import { ResultsContext } from '../context/resultsContext';
-import { useSearchParams } from 'react-router';
+import { useSearchParams, useNavigate } from 'react-router';
 import { Outlet } from 'react-router';
 import './homepage.css';
 
@@ -25,7 +25,8 @@ export function HomePage() {
     error: false,
     errorNumber: 200,
   });
-  const [_, setSearchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     setStatus({ ...status, isLoading: true });
@@ -68,7 +69,7 @@ export function HomePage() {
           });
         }
       });
-  }, [searchTerm, pageNumber]);
+  }, [searchTerm, pageNumber, searchParams]);
   return (
     <ResultsContext.Provider
       value={{
@@ -95,7 +96,15 @@ export function HomePage() {
           <TopControls />
         </SearchTermContext.Provider>
         <div className="results_container">
-          <div className="list_container">
+          <div
+            onClick={() => {
+              if (item) {
+                setItem(0);
+                navigate('/');
+              }
+            }}
+            className="list_container"
+          >
             <Results />
             <Paginator />
           </div>

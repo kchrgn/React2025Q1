@@ -1,10 +1,11 @@
-import { useParams } from 'react-router';
+import { useParams, useNavigate } from 'react-router';
 import { useState, useEffect } from 'react';
 import { API_URL } from '../pages/homePage';
 import { IPlanet } from '../interfaces/SWapi';
 import { Loader } from '../components/loader/loader';
 import { useContext } from 'react';
 import { ResultsContext } from '../context/resultsContext';
+import './detail.css';
 
 export function Detail() {
   const { id } = useParams();
@@ -13,10 +14,10 @@ export function Detail() {
   const [errorCode, setErrorCode] = useState(200);
   const [detail, setDetail] = useState<IPlanet>();
   const { setItem } = useContext(ResultsContext);
-
-  const url = API_URL + '/' + id;
+  const navigate = useNavigate();
 
   useEffect(() => {
+    const url = API_URL + '/' + id;
     setIsLoading(true);
 
     fetch(url)
@@ -37,28 +38,35 @@ export function Detail() {
 
   if (isLoading) {
     return (
-      <div className="results_container">
-        {' '}
-        <Loader />{' '}
+      <div className="detail_card">
+        <Loader />
       </div>
     );
   }
   if (error) {
     return (
-      <div className="results_container">
+      <div className="detail_card">
         <div>HTTP error {errorCode}</div>
       </div>
     );
   } else {
     return (
       <>
-        <div>
+        <div className="detail_card">
           <h3>{detail?.name}</h3>
-          <p>ID={id}</p>
+          <div>Gravity: {detail?.gravity}</div>
+          <div>Climate: {detail?.climate}</div>
+          <div>Diameter: {detail?.diameter}</div>
+          <div>Population: {detail?.population}</div>
+          <div>Surface water: {detail?.surface_water}</div>
+          <div>Rotation period: {detail?.rotation_period}</div>
+          <div>Orbital period: {detail?.orbital_period}</div>
+
           <button
             className="btn error"
             onClick={() => {
               setItem(0);
+              navigate('/');
             }}
           >
             Close detail card

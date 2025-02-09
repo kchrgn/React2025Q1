@@ -10,7 +10,7 @@ function App() {
     <>
       <ErrorBoundary>
         <Routes>
-          <Route path="planets" element={<HomePage />}>
+          <Route path="/" element={<HomePage />}>
             <Route path=":id" element={<Detail />} />
             <Route path="*" element={<ErrorPage />} />
           </Route>

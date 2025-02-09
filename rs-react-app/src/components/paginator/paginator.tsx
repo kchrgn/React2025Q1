@@ -14,7 +14,7 @@ export default function Paginator() {
             if (e == pageNumber) {
               return (
                 <Link
-                  to="/sw/planets"
+                  to="/"
                   className="active"
                   onClick={() => {
                     setPageNumber(e);

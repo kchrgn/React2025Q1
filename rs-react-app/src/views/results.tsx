@@ -6,7 +6,7 @@ import { useContext } from 'react';
 import { NavLink } from 'react-router';
 
 export default function Results() {
-  const { status, results, item, setItem } = useContext(ResultsContext);
+  const { status, results, setItem } = useContext(ResultsContext);
   if (status.isLoading) {
     return (
       <div className="results_container">
@@ -22,12 +22,8 @@ export default function Results() {
     );
   } else {
     return (
-      <div
-        onClick={() => {
-          if (item) setItem(0);
-        }}
-      >
-        <h3>Results</h3>
+      <div>
+        <h3>Planets</h3>
         <div className="items_container">
           {results &&
             results.planets &&
@@ -44,10 +40,7 @@ export default function Results() {
                     }
                   }}
                 >
-                  <h4>{e.name}</h4>
-                  <div>gravity: {e.gravity}</div>
-                  <div>climate: {e.climate}</div>
-                  <div>{Number(id)}</div>
+                  <h3>{e.name}</h3>
                 </NavLink>
               );
             })}

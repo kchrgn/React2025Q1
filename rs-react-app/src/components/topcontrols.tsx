@@ -7,7 +7,7 @@ class TopControls extends Component {
   render() {
     return (
       <div>
-        <h3>Top controls</h3>
+        <h3>Star Wars Planets World</h3>
         <SearchInputField />
         <SearchButton />
         <ErrorButton />
