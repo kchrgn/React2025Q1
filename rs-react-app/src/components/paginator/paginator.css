@@ -1,0 +1,24 @@
+.paginator {
+  display: inline-block;
+}
+
+.paginator a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.paginator a:hover:not(.active) {
+  background-color: #ddd;
+}
+
+.paginator a.active {
+  background-color: #4c7faf;
+  color: white;
+  border: 1px solid #4c7faf;
+}
+.center {
+  text-align: center;
+}

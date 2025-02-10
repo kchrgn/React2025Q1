@@ -1,21 +1,19 @@
-import { Component } from 'react';
+import { useState } from 'react';
+import './button.css';
 
-class ErrorButton extends Component {
-  state = { emitError: false };
-  render() {
-    if (this.state.emitError) throw new Error('User trhrown error');
-    return (
-      <>
-        <button
-          onClick={() => {
-            this.setState({ emitError: true });
-          }}
-        >
-          Error Button
-        </button>
-      </>
-    );
-  }
+export default function ErrorButton() {
+  const [emitError, setEmitError] = useState(false);
+  if (emitError) throw new Error('User trhrown error');
+  return (
+    <>
+      <button
+        className="btn error"
+        onClick={() => {
+          setEmitError(true);
+        }}
+      >
+        Error Button
+      </button>
+    </>
+  );
 }
-
-export default ErrorButton;

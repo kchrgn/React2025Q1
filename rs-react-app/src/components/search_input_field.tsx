@@ -1,36 +1,26 @@
-import { Component, SyntheticEvent } from 'react';
+import { useContext } from 'react';
+import { ChangeEvent } from 'react';
+import { SearchTermContext } from '../context/searchTermContext';
+import useGetSearchThermFromLS from '../hooks/getSearchThermFromLS';
 
-class SearchInputField extends Component {
-  state = { value: '' };
+export default function SearchInputField() {
+  const { searchFieldValue, setSearchFieldValue } =
+    useContext(SearchTermContext);
 
-  handleSearchValueChange = (e: ChangeEvent<HTMLInputElement>) => {
-    this.setState({ value: e.target.value });
+  const handleSearchValueChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setSearchFieldValue(e.target.value);
     localStorage.setItem('searchFieldValue', e.target.value);
   };
 
-  componentDidMount(): void {
-    const lsValue = localStorage.getItem('searchFieldValue');
-    if (lsValue) {
-      this.setState({ value: localStorage.getItem('searchFieldValue') });
-    } else {
-      localStorage.setItem('searchFieldValue', '');
-    }
-  }
-  render() {
-    return (
-      <>
-        <input
-          type="text"
-          value={this.state.value}
-          onChange={this.handleSearchValueChange}
-        ></input>
-      </>
-    );
-  }
-}
+  useGetSearchThermFromLS(setSearchFieldValue);
 
-interface ChangeEvent<T = Element> extends SyntheticEvent<T> {
-  target: EventTarget & T;
+  return (
+    <>
+      <input
+        type="text"
+        value={searchFieldValue}
+        onChange={handleSearchValueChange}
+      ></input>
+    </>
+  );
 }
-
-export default SearchInputField;
